@@ -1,0 +1,177 @@
+:root {
+  --secondary-color: rgb(48, 48, 48);
+  --body-color: #000000;
+  --header-color: #153E90;
+  --task-color: #54E346; 
+  --btn-color: #FFFAA4;
+  --btn-hover-color: #f9f153;
+  --light-font-color: #ffffff;
+  --list-color: #c2c2c2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background-color: var(--body-color);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: var(--header-color);
+  color: var(--light-font-color);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0px;
+}
+
+header span {
+  font-size: 1.5rem;
+}
+
+nav li {
+  display: inline;
+}
+
+nav li a {
+  text-decoration: none;
+  margin-left: 30px;
+  color: var(--light-font-color);
+}
+
+
+
+main {
+  flex-grow: 1;
+  background-image: url('./assets/images//iguazu.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.app {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.list-container {
+  background-color: var(--list-color);
+  border-radius: 8px;
+  padding: 12px;
+  width: 32%;
+  min-height: 130px;
+}
+
+.list-container>h2 {
+  margin-bottom: 10px;
+}
+
+.task-list {
+  list-style-type: none;
+}
+
+.task {
+  background-color: var(--task-color);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 14px 20px 14px 9px;
+  cursor: pointer;
+  position: relative;
+}
+
+.arrow-btn {
+   background-color: transparent;
+   font-size: 1.25rem;
+   min-width: 1.75rem;
+   min-height: 1.75rem;
+   border-width: 0;
+   position: absolute;
+   cursor: pointer;
+   margin: 'auto';
+}
+
+.up {
+  top: -14px; 
+  left: 0; 
+  right: 0; 
+}
+
+.left {
+  top: 0; 
+  bottom: 0; 
+  left: -16px;
+}
+
+.right {
+  top: 0; 
+  bottom: 0; 
+  right: -16px;
+}
+
+.form-style {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-component {
+  padding: 0 10px;
+  border: none;
+  border-radius: 4px;
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.input-task {
+  background-color: var(--task-color);
+  outline: none;
+}
+
+.btn-component {
+  background-color: var(--btn-color);
+  color: var(--secondary-color);
+  padding: 0 10px;
+  min-height: 32px;
+  min-width: 32px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  z-index: 1;
+}
+
+.btn-component:hover {
+  background-color: var(--btn-hover-color);
+  color: var(--body-color);
+}
+
+
+
+footer {
+  background-color: var(--secondary-color);
+  color: var(--light-font-color);
+}
+
+.footer-container {
+  padding: 25px 0px;
+  text-align: center;
+}
+
+.container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px;
+}
