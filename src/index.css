@@ -87,14 +87,15 @@ main {
 .task {
   background-color: var(--task-color);
   border-radius: 4px;
-  margin-bottom: 10px;
-  padding: 14px 20px 14px 9px;
+  margin-bottom: 15px;
+  padding: 10px 20px 10px 9px;
   cursor: pointer;
   position: relative;
 }
 
 .arrow-btn {
    background-color: transparent;
+   color: var(--header-color);
    font-size: 1.25rem;
    min-width: 1.75rem;
    min-height: 1.75rem;
@@ -110,13 +111,19 @@ main {
   right: 0; 
 }
 
-.left {
+.down {
+  bottom: -17px; 
+  left: 0; 
+  right: 0; 
+}
+
+.back {
   top: 0; 
   bottom: 0; 
   left: -16px;
 }
 
-.right {
+.next {
   top: 0; 
   bottom: 0; 
   right: -16px;
@@ -133,11 +140,11 @@ main {
   border-radius: 4px;
   flex-grow: 1;
   cursor: pointer;
+  outline: none;
 }
 
 .input-task {
   background-color: var(--task-color);
-  outline: none;
 }
 
 .btn-component {
