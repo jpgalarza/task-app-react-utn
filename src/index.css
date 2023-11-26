@@ -85,6 +85,7 @@ main {
 }
 
 .task {
+  display: flex;
   background-color: var(--task-color);
   border-radius: 4px;
   margin-bottom: 15px;
@@ -96,7 +97,7 @@ main {
 .arrow-btn {
    background-color: transparent;
    color: var(--header-color);
-   font-size: 1.25rem;
+   font-size: 1.1rem;
    min-width: 1.75rem;
    min-height: 1.75rem;
    border-width: 0;
@@ -105,14 +106,18 @@ main {
    margin: 'auto';
 }
 
+.arrow-btn:hover {
+  font-size: 1.65rem;
+}
+
 .up {
-  top: -14px; 
+  top: -6px; 
   left: 0; 
   right: 0; 
 }
 
 .down {
-  bottom: -17px; 
+  bottom: -10px; 
   left: 0; 
   right: 0; 
 }
@@ -120,16 +125,17 @@ main {
 .back {
   top: 0; 
   bottom: 0; 
-  left: -16px;
+  left: -8px;
 }
 
 .next {
   top: 0; 
   bottom: 0; 
-  right: -16px;
+  right: -7px;
 }
 
 .form-style {
+  flex-grow: 1;
   display: flex;
   justify-content: space-between;
 }
@@ -141,10 +147,16 @@ main {
   flex-grow: 1;
   cursor: pointer;
   outline: none;
+  background-color: var(--light-font-color);
 }
 
-.input-task {
+.task-input {
   background-color: var(--task-color);
+}
+
+.input-active {
+  background-color: var(--light-font-color);
+  z-index: 1;
 }
 
 .btn-component {

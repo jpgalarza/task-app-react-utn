@@ -9,7 +9,11 @@ export const TaskForm = () => {
   const submitTask = (e) => {
     e.preventDefault();
 
-    if(taskName !== '') addTask(taskName);
+    const taskNameTrim = taskName.trim();
+
+    if(taskNameTrim === '') return;
+
+    addTask(taskNameTrim);
 
     setTaskName('');
   };
@@ -22,6 +26,7 @@ export const TaskForm = () => {
         className="input-component"
         value={taskName}
         onChange={e => setTaskName(e.target.value)}
+        required
       />
       <button type="submit" className="btn-component">Agregar</button>
     </form>

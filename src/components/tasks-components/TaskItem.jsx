@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import {
   FaEdit,
   FaTrashAlt,
@@ -6,56 +6,99 @@ import {
   FaArrowLeft,
   FaArrowRight,
   FaArrowDown,
+  FaSave,
 } from "react-icons/fa";
 import TaskContext from "../../context/taskContext";
 
 export const TaskItem = ({ task, first, last }) => {
-  const { nombre, estado } = task;
-  const { nextStatus, backStatus, prioritizeTask, postponeTask } = useContext(TaskContext);
-  const [mouseOver, setMouseOver] = useState(false);
+  const { id, nombre, estado } = task;
+  const { 
+    nextStatus, 
+    backStatus, 
+    prioritizeTask, 
+    postponeTask, 
+    updateTaskName , 
+    deleteTask 
+  } = useContext(TaskContext);
+  const [showArrows, setShowArrows] = useState(false)
+  const [activeEdition, setActiveEdition] = useState(false);
+  const [taskName, setTaskName] = useState(nombre);
+  const taskNameInputRef = useRef();
 
   const handlePrioritize = (task) => {
-    setMouseOver(false);
+    setShowArrows(false);
     prioritizeTask(task);
   };
 
   const handlePostpone = (task) => {
-    setMouseOver(false);
+    setShowArrows(false);
     postponeTask(task);
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    const taskNameTrim = taskName.trim();
+
+    if(taskNameTrim === '') return;
+
+    if(activeEdition) {
+      setActiveEdition(false)
+      updateTaskName(id, taskNameTrim);
+    }else {
+      setActiveEdition(true)
+      taskNameInputRef.current.focus();
+    }
   };
 
 
   return (
     <li 
       className="task" 
-      onMouseOver={() => setMouseOver(true)}
-      onMouseOut={() => setMouseOver(false)}
+      onMouseOver={() => activeEdition? setShowArrows(false) : setShowArrows(true)}
+      onMouseOut={() => setShowArrows(false)}
     >
-      <form className="form-style">
-        <input type="text" value={nombre} className="input-component input-task" readOnly/>
-        <button type="button" className="btn-component"><FaEdit /></button>
-        <button type="button" className="btn-component"><FaTrashAlt /></button>
-        {mouseOver && !first && (
-          <button type="button" className="arrow-btn up" onClick={() => handlePrioritize(task)}>
-            <FaArrowUp />
-          </button>
-        )}
-        {mouseOver && !last && (
-          <button type="button" className="arrow-btn down" onClick={() => handlePostpone(task)}>
-            <FaArrowDown />
-          </button>
-        )}
-        {mouseOver && estado !== "completada" && (
-          <button type="button" className="arrow-btn next" onClick={() => nextStatus(task)}>
-            <FaArrowRight />
-          </button>
-        )}
-        {mouseOver && estado !== "pendiente" && (
-          <button type="button" className="arrow-btn back" onClick={() => backStatus(task)}>
-            <FaArrowLeft />
-          </button>
-        )}
+      <form className="form-style" onSubmit={submit}>
+        <input 
+          type="text"
+          name="taskName" 
+          value={taskName}
+          ref={taskNameInputRef}
+          className={`input-component task-input ${activeEdition? 'input-active' : ''}`}
+          readOnly={!activeEdition}
+          required={activeEdition}
+          onChange={(e) => setTaskName(e.target.value)}
+          onBlur={submit}
+        />
+        <button type='submit' className="btn-component">
+          {activeEdition? <FaSave /> : <FaEdit />}
+        </button>
       </form>
+
+      <button type="button" className="btn-component" onClick={() => deleteTask(id)}>
+        <FaTrashAlt />
+      </button>
+      
+      {showArrows && !first && (
+        <button type="button" className="arrow-btn up" onClick={() => handlePrioritize(task)}>
+          <FaArrowUp />
+        </button>
+      )}
+      {showArrows && !last && (
+        <button type="button" className="arrow-btn down" onClick={() => handlePostpone(task)}>
+          <FaArrowDown />
+        </button>
+      )}
+      {showArrows && estado !== "completada" && (
+        <button type="button" className="arrow-btn next" onClick={() => nextStatus(task)}>
+          <FaArrowRight />
+        </button>
+      )}
+      {showArrows && estado !== "pendiente" && (
+        <button type="button" className="arrow-btn back" onClick={() => backStatus(task)}>
+          <FaArrowLeft />
+        </button>
+      )}
     </li>
   );
 };
