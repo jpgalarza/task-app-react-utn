@@ -1,10 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import TaskContext from '../../context/taskContext'
 import uuid from 'react-uuid';
 
 const TaskProvider = ({ children }) => {
   const [taskList, setTaskList] = useState([]);
 
+  useEffect(() => {
+    const tasks = localStorage.getItem('tasks');
+
+    if(tasks) setTaskList(JSON.parse(tasks));
+  }, [])
+
+  useEffect(() => {
+    if(taskList.length > 0) {
+      localStorage.setItem('tasks', JSON.stringify(taskList));
+    }
+  }, [taskList])
+  
+  
   const addTask = (taskName) => {
     setTaskList([...taskList, {id: uuid(), nombre: taskName, estado: "pendiente"}]);
   };
