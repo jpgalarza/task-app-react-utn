@@ -12,6 +12,8 @@ export const TaskForm = () => {
 
     const taskNameTrim = taskName.trim();
 
+    if(taskNameTrim !== '') return;
+
     addTask(taskNameTrim);
 
     setTaskName('');

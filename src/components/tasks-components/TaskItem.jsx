@@ -42,7 +42,9 @@ export const TaskItem = ({ task, first, last }) => {
     if(activeEdition) {
       setActiveEdition(false)
       const taskNameTrim = taskName.trim();
+      if(taskNameTrim !== '') return;
       updateTaskName(id, taskNameTrim);
+      
     }else {
       setActiveEdition(true)
       setTimeout(() => {
