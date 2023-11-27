@@ -9,6 +9,7 @@ import {
   FaSave,
 } from "react-icons/fa";
 import TaskContext from "../../context/taskContext";
+import { removeLeadingSpace } from "../../helpers/removeLeadingSpace";
 
 export const TaskItem = ({ task, first, last }) => {
   const { id, nombre, estado } = task;
@@ -38,16 +39,15 @@ export const TaskItem = ({ task, first, last }) => {
   const submit = (e) => {
     e.preventDefault();
 
-    const taskNameTrim = taskName.trim();
-
-    if(taskNameTrim === '') return;
-
     if(activeEdition) {
       setActiveEdition(false)
+      const taskNameTrim = taskName.trim();
       updateTaskName(id, taskNameTrim);
     }else {
       setActiveEdition(true)
-      taskNameInputRef.current.focus();
+      setTimeout(() => {
+        taskNameInputRef.current?.focus();
+      }, 0);
     }
   };
 
@@ -59,7 +59,8 @@ export const TaskItem = ({ task, first, last }) => {
       onMouseOut={() => setShowArrows(false)}
     >
       <form className="form-style" onSubmit={submit}>
-        <input 
+        {activeEdition? (
+          <input 
           type="text"
           name="taskName" 
           value={taskName}
@@ -67,15 +68,20 @@ export const TaskItem = ({ task, first, last }) => {
           className={`input-component task-input ${activeEdition? 'input-active' : ''}`}
           readOnly={!activeEdition}
           required={activeEdition}
-          onChange={(e) => setTaskName(e.target.value)}
+          maxLength={50}
+          onChange={(e) => setTaskName(removeLeadingSpace(e.target.value))}
           onBlur={submit}
         />
+        ) : (
+          <div className="card-text">{taskName}</div>
+        )}
+        
         <button type='submit' className="btn-component">
           {activeEdition? <FaSave /> : <FaEdit />}
         </button>
       </form>
 
-      <button type="button" className="btn-component" onClick={() => deleteTask(id)}>
+      <button type="button" className="btn-component danger" onClick={() => deleteTask(id)}>
         <FaTrashAlt />
       </button>
       

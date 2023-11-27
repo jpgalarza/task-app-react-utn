@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import TaskContext from "../../context/taskContext";
+import { removeLeadingSpace } from "../../helpers/removeLeadingSpace";
 
 
 export const TaskForm = () => {
@@ -10,8 +11,6 @@ export const TaskForm = () => {
     e.preventDefault();
 
     const taskNameTrim = taskName.trim();
-
-    if(taskNameTrim === '') return;
 
     addTask(taskNameTrim);
 
@@ -25,8 +24,9 @@ export const TaskForm = () => {
         placeholder="Agregar nueva tarea" 
         className="input-component"
         value={taskName}
-        onChange={e => setTaskName(e.target.value)}
         required
+        maxLength={50}
+        onChange={e => setTaskName(removeLeadingSpace(e.target.value))}
       />
       <button type="submit" className="btn-component">Agregar</button>
     </form>

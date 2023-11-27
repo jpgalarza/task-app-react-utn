@@ -9,6 +9,14 @@ const TaskProvider = ({ children }) => {
     setTaskList([...taskList, {id: uuid(), nombre: taskName, estado: "pendiente"}]);
   };
 
+  const updateTaskName = (taskId, taskName) => {
+    setTaskList(taskList.map(tsk => tsk.id === taskId? {...tsk, nombre: taskName} : tsk));
+  };
+
+  const deleteTask = (taskId) => {
+    setTaskList(taskList.filter(tsk => tsk.id !== taskId));
+  };
+
   const nextStatus = (task) => {
     const taskUpdated = {...task, estado: task.estado === 'pendiente'? 'enProgreso' : 'completada'};
     const filteredList = taskList.filter(tsk => tsk.id !== task.id);
@@ -31,25 +39,17 @@ const TaskProvider = ({ children }) => {
     setTaskList([...filteredList, task]);
   };
 
-  const updateTaskName = (taskId, taskName) => {
-    setTaskList(taskList.map(tsk => tsk.id === taskId? {...tsk, nombre: taskName} : tsk));
-  };
-
-  const deleteTask = (taskId) => {
-    setTaskList(taskList.filter(tsk => tsk.id !== taskId));
-  };
-
 
   return (
     <TaskContext.Provider value={{
       taskList,
       addTask,
+      updateTaskName,
+      deleteTask,
       nextStatus,
       backStatus,
       prioritizeTask,
       postponeTask,
-      updateTaskName,
-      deleteTask
     }}>
       { children }
     </TaskContext.Provider>
