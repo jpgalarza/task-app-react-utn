@@ -18,6 +18,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
   background-color: var(--body-color);
+  overflow-x: hidden;
 }
 
 #root {
@@ -29,6 +30,7 @@ body {
 header {
   background-color: var(--header-color);
   color: var(--light-font-color);
+  height: 75px;
 }
 
 .header-container {
@@ -42,14 +44,48 @@ header span {
   font-size: 1.5rem;
 }
 
-nav li {
+.menu-container {
+  position: absolute;
+  top: 0;
+  right: -66%;
+  width: 65%;
+  background-color: var(--header-color);
+  border-radius: 0 0 0 10px;
+  transition: all 0.5s;
+  z-index: 10;
+}
+
+.container-close-menu {
+  height: 75px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.menu-buttons {
+  background-color: transparent;
+  padding: 5px 10px;
+  border: none;
+  color: var(--light-font-color);
+  font-size: 1.5rem;
+}
+
+.open-menu {
+  right: 0;
+}
+
+header nav li {
   display: inline;
 }
 
-nav li a {
+header nav a {
   text-decoration: none;
-  margin-left: 30px;
   color: var(--light-font-color);
+  display: block;
+  text-align: center;
+  border-top: 1px solid var(--list-color);
+  padding: 15px 0;
 }
 
 main {
@@ -217,6 +253,33 @@ footer {
   .app {
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .menu-container {
+    position: static;
+    width: auto;
+    background-color: transparent;
+    border-radius: 0;
+  }
+
+  .container-close-menu {
+    display: none;
+  }
+
+  .menu-buttons {
+    display: none;
+  }
+
+  header nav ul {
+    display: flex;
+    flex-direction: row;
+  }
+
+  header nav a {
+    border: none;
+    margin-left: 30px;
+    padding: 5px 15px;
+    margin: 0 3px;
   }
 
   .list-container {
