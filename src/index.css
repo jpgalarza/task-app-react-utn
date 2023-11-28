@@ -4,7 +4,6 @@
   --header-color: #153E90;
   --task-color: #54E346; 
   --btn-color: #0b5ed7;
-  --btn-hover-color: #f9f153;
   --light-font-color: #ffffff;
   --list-color: #c2c2c2;
 }
@@ -53,8 +52,6 @@ nav li a {
   color: var(--light-font-color);
 }
 
-
-
 main {
   flex-grow: 1;
   background-image: url('./assets/images//iguazu.jpg');
@@ -64,7 +61,7 @@ main {
 
 .app {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
 }
 
@@ -72,8 +69,9 @@ main {
   background-color: var(--list-color);
   border-radius: 8px;
   padding: 12px;
-  flex-basis: 32%;
+  width: 100%;
   min-height: 110px;
+  margin-bottom: 20px;
 }
 
 .list-container>h2 {
@@ -116,6 +114,7 @@ main {
 
 .task-input {
   background-color: var(--task-color);
+  width: 100%;
 }
 
 .input-active {
@@ -211,4 +210,17 @@ footer {
   max-width: 1400px;
   margin: auto;
   padding: 20px;
+}
+
+
+@media screen and (min-width: 993px) {
+  .app {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .list-container {
+    width: 32%;
+    margin-bottom: 0;
+  }
 }

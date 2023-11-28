@@ -13,6 +13,10 @@ import { removeLeadingSpace } from "../../helpers/removeLeadingSpace";
 
 export const TaskItem = ({ task, first, last }) => {
   const { id, nombre, estado } = task;
+  const [showArrows, setShowArrows] = useState(false)
+  const [activeEdition, setActiveEdition] = useState(false);
+  const [taskName, setTaskName] = useState(nombre);
+  const taskNameInputRef = useRef();
   const { 
     nextStatus, 
     backStatus, 
@@ -21,10 +25,7 @@ export const TaskItem = ({ task, first, last }) => {
     updateTaskName , 
     deleteTask 
   } = useContext(TaskContext);
-  const [showArrows, setShowArrows] = useState(false)
-  const [activeEdition, setActiveEdition] = useState(false);
-  const [taskName, setTaskName] = useState(nombre);
-  const taskNameInputRef = useRef();
+
 
   const handlePrioritize = (task) => {
     setShowArrows(false);
@@ -42,10 +43,11 @@ export const TaskItem = ({ task, first, last }) => {
     if(activeEdition) {
       setActiveEdition(false)
       const taskNameTrim = taskName.trim();
-      if(taskNameTrim !== '') return;
+      if(taskNameTrim === '') return;
       updateTaskName(id, taskNameTrim);
       
     }else {
+      setShowArrows(false)
       setActiveEdition(true)
       setTimeout(() => {
         taskNameInputRef.current?.focus();
@@ -59,6 +61,7 @@ export const TaskItem = ({ task, first, last }) => {
       className="task" 
       onMouseOver={() => activeEdition? setShowArrows(false) : setShowArrows(true)}
       onMouseOut={() => setShowArrows(false)}
+      onDoubleClick={() => setShowArrows(!showArrows)}
     >
       <form className="form-style" onSubmit={submit}>
         {activeEdition? (
