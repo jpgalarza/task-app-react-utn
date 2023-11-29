@@ -17,7 +17,8 @@ export const TaskItem = ({ task, first, last }) => {
   const [activeEdition, setActiveEdition] = useState(false);
   const [taskName, setTaskName] = useState(nombre);
   const taskNameInputRef = useRef();
-  const { 
+  const {
+    statusTypes: { status1, status3 },
     nextStatus, 
     backStatus, 
     prioritizeTask, 
@@ -100,12 +101,12 @@ export const TaskItem = ({ task, first, last }) => {
           <FaArrowDown />
         </button>
       )}
-      {showArrows && estado !== "completada" && (
+      {showArrows && estado !== status3 && (
         <button type="button" className="arrow-btn next" onClick={() => nextStatus(task)}>
           <FaArrowRight />
         </button>
       )}
-      {showArrows && estado !== "pendiente" && (
+      {showArrows && estado !== status1 && (
         <button type="button" className="arrow-btn back" onClick={() => backStatus(task)}>
           <FaArrowLeft />
         </button>

@@ -4,11 +4,11 @@ import { useContext } from 'react';
 import TaskContext from '../../context/taskContext';
 
 export const TaskList = ({ estado }) => {
-  const { taskList } = useContext(TaskContext);
+  const { taskList, statusTypes: { status1 } } = useContext(TaskContext);
 
   return (
     <div className="list-container">
-        <h2>{estado === 'enProgreso'? 'En Progreso' : estado[0].toUpperCase() + estado.slice(1)}</h2>
+        <h2>{estado}</h2>
         <ul className="task-list">
           {taskList.filter(task => task.estado === estado).map((task, index, array) => (
             <TaskItem 
@@ -19,7 +19,7 @@ export const TaskList = ({ estado }) => {
             />
           ))}
         </ul>
-        {estado === 'pendiente' && <TaskForm/>}
+        {estado === status1 && <TaskForm/>}
     </div>
   )
 }
