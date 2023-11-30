@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import TaskContext from '../../context/taskContext'
 
-const statusTypes = {
+const taskStatuses = {
   status1: 'Pendiente',
   status2: 'En Progreso',
   status3: 'Completada',
 };
 
-const { status1, status2, status3 } = statusTypes;
+const { status1, status2, status3 } = taskStatuses;
 
 const TaskProvider = ({ children }) => {
   const [taskList, setTaskList] = useState([]);
@@ -19,9 +19,7 @@ const TaskProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if(taskList.length > 0) {
-      localStorage.setItem('tasks', JSON.stringify(taskList));
-    }
+    if(taskList.length > 0) localStorage.setItem('tasks', JSON.stringify(taskList));
   }, [taskList])
   
   
@@ -63,7 +61,7 @@ const TaskProvider = ({ children }) => {
   return (
     <TaskContext.Provider value={{
       taskList,
-      statusTypes,
+      taskStatuses,
       addTask,
       updateTaskName,
       deleteTask,

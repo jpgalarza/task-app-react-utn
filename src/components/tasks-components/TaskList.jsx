@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import TaskContext from '../../context/taskContext';
 
 export const TaskList = ({ estado }) => {
-  const { taskList, statusTypes: { status1 } } = useContext(TaskContext);
+  const { taskList, taskStatuses: { status1 } } = useContext(TaskContext);
 
   return (
     <div className="list-container">

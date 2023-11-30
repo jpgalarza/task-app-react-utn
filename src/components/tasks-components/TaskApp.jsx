@@ -3,7 +3,7 @@ import { TaskList } from "./TaskList"
 import TaskContext from "../../context/taskContext"
 
 export const TaskApp = () => {
-  const { statusTypes: { status1, status2, status3 } } = useContext(TaskContext);
+  const { taskStatuses: { status1, status2, status3 } } = useContext(TaskContext);
   return (
     <main>
       <div className="container app">

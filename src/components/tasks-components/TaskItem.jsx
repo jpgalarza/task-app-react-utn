@@ -18,7 +18,7 @@ export const TaskItem = ({ task, first, last }) => {
   const [taskName, setTaskName] = useState(nombre);
   const taskNameInputRef = useRef();
   const {
-    statusTypes: { status1, status3 },
+    taskStatuses: { status1, status3 },
     nextStatus, 
     backStatus, 
     prioritizeTask, 
