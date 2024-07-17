@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import TaskContext from '../../context/taskContext'
 
 const taskStatuses = {
-  status1: 'Pendiente',
-  status2: 'En Progreso',
-  status3: 'Completada',
+  PENDING: 'Pendiente',
+  PROGRESS: 'En Progreso',
+  COMPLETED: 'Completada',
 };
 
-const { status1, status2, status3 } = taskStatuses;
+const { PENDING, PROGRESS, COMPLETED } = taskStatuses;
 
 const TaskProvider = ({ children }) => {
   const [taskList, setTaskList] = useState([]);
@@ -24,7 +24,7 @@ const TaskProvider = ({ children }) => {
   
   
   const addTask = (taskName) => {
-    setTaskList([...taskList, {id: crypto.randomUUID(), nombre: taskName, estado: status1}]);
+    setTaskList([...taskList, {id: crypto.randomUUID(), nombre: taskName, estado: PENDING}]);
   };
 
   const updateTaskName = (taskId, taskName) => {
@@ -36,13 +36,13 @@ const TaskProvider = ({ children }) => {
   };
 
   const nextStatus = (task) => {
-    const taskUpdated = {...task, estado: task.estado === status1? status2 : status3};
+    const taskUpdated = {...task, estado: task.estado === PENDING? PROGRESS : COMPLETED};
     const filteredList = taskList.filter(tsk => tsk.id !== task.id);
     setTaskList([...filteredList, taskUpdated]);
   };
 
   const backStatus = (task) => {
-    const taskUpdated = {...task, estado: task.estado === status3? status2 : status1};
+    const taskUpdated = {...task, estado: task.estado === COMPLETED? PROGRESS : PENDING};
     const filteredList = taskList.filter(tsk => tsk.id !== task.id);
     setTaskList([...filteredList, taskUpdated]);
   };

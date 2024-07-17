@@ -18,7 +18,7 @@ export const TaskItem = ({ task, first, last }) => {
   const [taskName, setTaskName] = useState(nombre);
   const taskNameInputRef = useRef();
   const {
-    taskStatuses: { status1, status3 },
+    taskStatuses: { PENDING, COMPLETED },
     nextStatus, 
     backStatus, 
     prioritizeTask, 
@@ -101,12 +101,12 @@ export const TaskItem = ({ task, first, last }) => {
           <FaArrowDown />
         </button>
       )}
-      {showArrows && estado !== status3 && (
+      {showArrows && estado !== COMPLETED && (
         <button type="button" className="arrow-btn next" onClick={() => nextStatus(task)}>
           <FaArrowRight />
         </button>
       )}
-      {showArrows && estado !== status1 && (
+      {showArrows && estado !== PENDING && (
         <button type="button" className="arrow-btn back" onClick={() => backStatus(task)}>
           <FaArrowLeft />
         </button>

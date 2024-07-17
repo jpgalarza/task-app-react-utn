@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import TaskContext from '../../context/taskContext';
 
 export const TaskList = ({ estado }) => {
-  const { taskList, taskStatuses: { status1 } } = useContext(TaskContext);
+  const { taskList, taskStatuses: { PENDING } } = useContext(TaskContext);
 
   return (
     <div className="list-container">
@@ -19,7 +19,7 @@ export const TaskList = ({ estado }) => {
             />
           ))}
         </ul>
-        {estado === status1 && <TaskForm/>}
+        {estado === PENDING && <TaskForm/>}
     </div>
   )
 }
